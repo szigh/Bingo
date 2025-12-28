@@ -5,11 +5,10 @@ namespace Bingo
 {
     public partial class App : Application
     {
-#pragma warning disable CS8618 
-        private ServiceProvider _serviceProvider;
-#pragma warning restore CS8618 
+        private ServiceProvider? _serviceProvider;
 
         protected override void OnStartup(StartupEventArgs e)
+        {
         {
             base.OnStartup(e);
 
