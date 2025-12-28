@@ -1,16 +1,13 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bingo
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+#pragma warning disable CS8618 
         private ServiceProvider _serviceProvider;
+#pragma warning restore CS8618 
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -24,7 +21,7 @@ namespace Bingo
             mainWindow.Show();
         }
 
-        private void ConfigureServices(IServiceCollection services)
+        private static void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IBingoNumberGenerator, BingoNumberGenerator>();
             services.AddTransient<BingoCallerViewModel>();

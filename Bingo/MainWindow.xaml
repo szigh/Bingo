@@ -3,12 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Bingo"
+        xmlns:local="clr-namespace:Bingo" 
+        d:DataContext="{d:DesignInstance Type=local:BingoCallerViewModel}"
         mc:Ignorable="d"
         Title="Bingo Caller" Height="450" Width="800">
     <Grid Background="LightGoldenrodYellow">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <TextBlock Text="{Binding CurrentCall}" FontSize="72" FontWeight="Bold" Foreground="DarkBlue" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+            <TextBlock Text="{Binding CurrentCall}" FontSize="144" FontWeight="Bold" Foreground="DarkBlue" HorizontalAlignment="Center" Margin="-20"/>
+            <TextBlock Text="{Binding Info}" FontSize="24" HorizontalAlignment="Center" Margin="20"/>
             <Button Content="Call Next Number" Command="{Binding CallNextNumberCommand}" Width="200" Height="50" FontSize="16"/>
         </StackPanel>
 
