@@ -53,7 +53,7 @@ jobs:
 
     # Publish the application (creates deployment-ready output)
     - name: Publish
-      run: dotnet publish Bingo/Bingo.csproj --configuration ${{ matrix. configuration }} --output ./publish
+      run: dotnet publish Bingo/Bingo.csproj --configuration ${{ matrix.configuration }} --output ./publish
 
     # Upload the build artifacts
     - name: Upload build artifacts
@@ -85,8 +85,8 @@ jobs:
         # Fetch all tags
         git fetch --tags
         
-        # Get the latest tag matching v* pattern, sorted by version
-        LATEST_TAG=$(git tag -l "v*" | sort -V | tail -n 1)
+        # Get the latest tag matching v* pattern, sorted by version using git's built-in sorting
+        LATEST_TAG=$(git tag -l "v*" --sort=-version:refname | head -n 1)
         
         if [ -z "$LATEST_TAG" ]; then
           # No tags exist, start with v0.0.1
@@ -98,6 +98,12 @@ jobs:
           
           # Split version into major.minor.patch
           IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          
+          # Validate that we have a proper three-part version
+          if [ -z "$MAJOR" ] || [ -z "$MINOR" ] || [ -z "$PATCH" ]; then
+            echo "Error: Invalid version format in tag $LATEST_TAG. Expected format: vX.Y.Z"
+            exit 1
+          fi
           
           # Increment patch version
           PATCH=$((PATCH + 1))
