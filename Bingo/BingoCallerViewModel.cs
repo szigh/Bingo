@@ -17,7 +17,7 @@ namespace Bingo
         private string _currentCall = "";
         private string _info = "Ready to play";
 
-        public ICommand CallNextNumberCommand { get; set; }
+        public ICommand CallNextNumberCommand { get; }
 
         public string CurrentCall
         {
