@@ -9,7 +9,6 @@ namespace Bingo
 
         protected override void OnStartup(StartupEventArgs e)
         {
-        {
             base.OnStartup(e);
 
             var serviceCollection = new ServiceCollection();
