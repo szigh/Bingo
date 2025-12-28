@@ -105,6 +105,12 @@ jobs:
             exit 1
           fi
           
+          # Validate that all parts are numeric
+          if ! [[ "$MAJOR" =~ ^[0-9]+$ ]] || ! [[ "$MINOR" =~ ^[0-9]+$ ]] || ! [[ "$PATCH" =~ ^[0-9]+$ ]]; then
+            echo "Error: Version parts must be numeric in tag $LATEST_TAG. Expected format: vX.Y.Z where X, Y, Z are numbers"
+            exit 1
+          fi
+          
           # Increment patch version
           PATCH=$((PATCH + 1))
           
