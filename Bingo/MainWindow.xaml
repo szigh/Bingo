@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bingo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Bingo Caller" Height="450" Width="800">
+    <Grid Background="LightGoldenrodYellow">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <TextBlock Text="{Binding CurrentCall}" FontSize="72" FontWeight="Bold" Foreground="DarkBlue" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+            <Button Content="Call Next Number" Command="{Binding CallNextNumberCommand}" Width="200" Height="50" FontSize="16"/>
+        </StackPanel>
 
     </Grid>
 </Window>
