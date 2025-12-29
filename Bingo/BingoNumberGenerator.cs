@@ -18,14 +18,14 @@
 
         public bool TryGetNextNumber(out int nextNumber)
         {
-            if (_generatedNumbers.Count >= 89)
+            if (_generatedNumbers.Count >= 90)
             {
                 nextNumber = -1;
                 return false; // All numbers have been generated
             }
             do
             {
-                nextNumber = _random.Next(1, 90);
+                nextNumber = _random.Next(1, 91);
             } while (_generatedNumbers.Contains(nextNumber));
 
             _generatedNumbers.Add(nextNumber);
