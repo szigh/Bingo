@@ -89,7 +89,7 @@ jobs:
         git fetch --tags
         
         # Get the latest tag matching v* pattern, sorted by version using git's built-in sorting
-        LATEST_TAG=$(git tag -l "v*" --sort=-version:refname | head -n 1)
+        LATEST_TAG=$(git tag -l "v[0-9]*.[0-9]*.[0-9]*" --sort=-version:refname | head -n 1)
         
         if [ -z "$LATEST_TAG" ]; then
           # No tags exist, start with v0.0.1
