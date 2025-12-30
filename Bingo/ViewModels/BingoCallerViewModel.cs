@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Bingo.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 

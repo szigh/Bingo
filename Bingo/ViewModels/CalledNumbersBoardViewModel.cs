@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Bingo;
+namespace Bingo.ViewModels;
 
 public partial class CalledNumbersBoardViewModel : ObservableObject
 {

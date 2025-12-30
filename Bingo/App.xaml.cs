@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Bingo.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bingo
