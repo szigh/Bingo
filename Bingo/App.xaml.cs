@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Bingo.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bingo
@@ -22,6 +23,7 @@ namespace Bingo
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IBingoNumberGenerator, BingoNumberGenerator>();
+            services.AddTransient<CalledNumbersBoardViewModel>();
             services.AddTransient<BingoCallerViewModel>();
             services.AddTransient<MainWindow>();
         }
