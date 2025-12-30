@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Bingo"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="400">
-    <ItemsControl ItemsSource="{Binding NumbersBoard}">
+    <ItemsControl ItemsSource="{Binding Numbers}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <UniformGrid Columns="10" Rows="9"/>

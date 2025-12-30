@@ -26,7 +26,7 @@
         <!--Called numbers board-->
         <local:CalledNumbersBoard Grid.Column="1" 
                                    Margin="30"
-                                   DataContext="{Binding}"/>
+                                   DataContext="{Binding NumbersBoard}"/>
 
     </Grid>
 </Window>

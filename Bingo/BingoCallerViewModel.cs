@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -8,12 +7,15 @@ namespace Bingo;
 public partial class BingoCallerViewModel : ObservableObject
 {
     private readonly IBingoNumberGenerator _bingoNumberGenerator;
+    private readonly CalledNumbersBoardViewModel _numbersBoard;
 
-    public BingoCallerViewModel(IBingoNumberGenerator bingoNumberGenerator)
+    public BingoCallerViewModel(
+        IBingoNumberGenerator bingoNumberGenerator, 
+        CalledNumbersBoardViewModel boardViewModel)
     {
         _bingoNumberGenerator = bingoNumberGenerator;
+        _numbersBoard = boardViewModel;
         CallNextNumberCommand = new RelayCommand(CallNextNumber);
-        InitializeNumbersBoard();
     }
 
     [ObservableProperty]
@@ -24,13 +26,7 @@ public partial class BingoCallerViewModel : ObservableObject
 
     public ICommand CallNextNumberCommand { get; }
 
-    public ObservableCollection<BingoNumberCell> NumbersBoard { get; } = [];
-
-    private void InitializeNumbersBoard()
-    {
-        for (int i = 1; i <= 90; i++)
-            NumbersBoard.Add(new BingoNumberCell(i));
-    }
+    public CalledNumbersBoardViewModel NumbersBoard => _numbersBoard;
 
     private void CallNextNumber()
     {
@@ -38,9 +34,7 @@ public partial class BingoCallerViewModel : ObservableObject
         {
             Info = "";
             CurrentCall = $"{nextNumber}";
-            
-            var cell = NumbersBoard.FirstOrDefault(c => c.Number == nextNumber);
-            cell?.IsCalled = true;
+            NumbersBoard.MarkNumberCalled(nextNumber);
         }
         else
         {
