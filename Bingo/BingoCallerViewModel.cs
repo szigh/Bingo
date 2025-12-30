@@ -11,10 +11,10 @@ public partial class BingoCallerViewModel : ObservableObject
 
     public BingoCallerViewModel(
         IBingoNumberGenerator bingoNumberGenerator, 
-        CalledNumbersBoardViewModel boardViewModel)
+        CalledNumbersBoardViewModel numbersBoard)
     {
         _bingoNumberGenerator = bingoNumberGenerator;
-        _numbersBoard = boardViewModel;
+        _numbersBoard = numbersBoard;
         CallNextNumberCommand = new RelayCommand(CallNextNumber);
     }
 
