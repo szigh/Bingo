@@ -1,8 +1,9 @@
-﻿namespace Bingo
+﻿namespace Bingo.Generators
 {
     public interface IBingoNumberGenerator
     {
         bool TryGetNextNumber(out int nextNumber);
+        void Reset();
     }
 
     public class BingoNumberGenerator : IBingoNumberGenerator
@@ -13,7 +14,7 @@
         public BingoNumberGenerator()
         {
             _random = new Random();
-            _generatedNumbers = [];
+            _generatedNumbers = new HashSet<int>();
         }
 
         public bool TryGetNextNumber(out int nextNumber)
@@ -30,6 +31,11 @@
 
             _generatedNumbers.Add(nextNumber);
             return true;
+        }
+
+        public void Reset()
+        {
+            _generatedNumbers.Clear();
         }
     }
 }
