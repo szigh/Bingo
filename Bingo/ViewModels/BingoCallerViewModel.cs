@@ -65,8 +65,8 @@ public partial class BingoCallerViewModel : ObservableObject
         
         if (result == MessageBoxResult.Yes)
         {
-            Application.Current.Windows.OfType<Window>()
-                .FirstOrDefault(w => w.GetType() == typeof(Views.BingoCallerView))?.Close();
+            var mainWindow = Application.Current?.MainWindow;
+            mainWindow?.Close();
         }
     }
 }
