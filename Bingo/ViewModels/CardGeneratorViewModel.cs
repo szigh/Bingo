@@ -1,8 +1,5 @@
 using System.Windows.Input;
-<<<<<<< HEAD
-=======
 using Bingo.Services;
->>>>>>> e67b9522048908d09b418fa7c0f48715d5adefb6
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
