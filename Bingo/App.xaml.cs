@@ -38,7 +38,8 @@ namespace Bingo
 
         private static void ConfigureLogging()
         {
-            var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+            var entryAssembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
+            var logRepository = LogManager.GetRepository(entryAssembly);
             var configFile = new FileInfo("log4net.config");
             
             if (configFile.Exists)
