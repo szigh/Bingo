@@ -30,7 +30,7 @@ namespace Bingo
             ConfigureServices(serviceCollection);
             _serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var mainWindow = _serviceProvider.GetRequiredService<BinfoCallerView>();
+            var mainWindow = _serviceProvider.GetRequiredService<BingoCallerView>();
             mainWindow.Show();
             
             Log.Info("Application started successfully");
@@ -53,14 +53,17 @@ namespace Bingo
             }
 
             // Set log level based on build configuration
+            // Note: Direct manipulation of the repository hierarchy is required to dynamically
+            // set log levels at runtime. This approach is documented in log4net best practices.
 #if DEBUG
             ((log4net.Repository.Hierarchy.Hierarchy)logRepository).Root.Level = Level.Debug;
+            ((log4net.Repository.Hierarchy.Hierarchy)logRepository).RaiseConfigurationChanged(EventArgs.Empty);
             Log.Debug("Logging configured for DEBUG build");
 #else
             ((log4net.Repository.Hierarchy.Hierarchy)logRepository).Root.Level = Level.Info;
+            ((log4net.Repository.Hierarchy.Hierarchy)logRepository).RaiseConfigurationChanged(EventArgs.Empty);
             Log.Info("Logging configured for RELEASE build");
 #endif
-            ((log4net.Repository.Hierarchy.Hierarchy)logRepository).RaiseConfigurationChanged(EventArgs.Empty);
         }
 
         private static void ConfigureServices(IServiceCollection services)
@@ -78,7 +81,6 @@ namespace Bingo
             services.AddTransient<CardGeneratorViewModel>();
             
             // Views
-            services.AddTransient<BinfoCallerView>();
             services.AddTransient<BingoCallerView>();
             services.AddTransient<CardGeneratorView>();
         }
