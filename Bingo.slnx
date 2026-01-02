@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="Bingo.Tests/Bingo.Tests.csproj" Id="9f4b2138-db97-4888-987c-1eec1ab2af1c" />
   <Project Path="Bingo/Bingo.csproj" />
 </Solution>
