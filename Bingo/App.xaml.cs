@@ -18,7 +18,7 @@ namespace Bingo
             ConfigureServices(serviceCollection);
             _serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            var mainWindow = _serviceProvider.GetRequiredService<BinfoCallerView>();
             mainWindow.Show();
         }
 
@@ -30,11 +30,10 @@ namespace Bingo
             // ViewModels
             services.AddTransient<CalledNumbersBoardViewModel>();
             services.AddTransient<BingoCallerViewModel>();
-            services.AddTransient<MainWindowViewModel>();
             services.AddTransient<CardGeneratorViewModel>();
             
             // Views
-            services.AddTransient<MainWindow>();
+            services.AddTransient<BinfoCallerView>();
             services.AddTransient<BingoCallerView>();
             services.AddTransient<CardGeneratorView>();
         }

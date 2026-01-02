@@ -5,7 +5,7 @@ using Bingo.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace Bingo;
+namespace Bingo.ViewModels;
 
 public partial class BingoCallerViewModel : ObservableObject
 {
@@ -24,10 +24,12 @@ public partial class BingoCallerViewModel : ObservableObject
     }
 
     [ObservableProperty]
+#pragma warning disable IDE0044 // Add readonly modifier
     private string _currentCall = "";
-    
+
     [ObservableProperty]
     private string _info = "Ready to play";
+#pragma warning restore IDE0044 // Add readonly modifier
 
     public ICommand CallNextNumberCommand { get; }
     public ICommand NewGameCommand { get; }

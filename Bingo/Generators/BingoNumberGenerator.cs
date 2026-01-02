@@ -10,6 +10,7 @@
     {
         private readonly Random _random;
         private readonly HashSet<int> _generatedNumbers;
+        private readonly object _lock = new();
 
         public BingoNumberGenerator()
         {
@@ -19,23 +20,29 @@
 
         public bool TryGetNextNumber(out int nextNumber)
         {
-            if (_generatedNumbers.Count >= 90)
+            lock (_lock)
             {
-                nextNumber = -1;
-                return false; // All numbers have been generated
-            }
-            do
-            {
-                nextNumber = _random.Next(1, 91);
-            } while (_generatedNumbers.Contains(nextNumber));
+                if (_generatedNumbers.Count >= 90)
+                {
+                    nextNumber = -1;
+                    return false; // All numbers have been generated
+                }
+                do
+                {
+                    nextNumber = _random.Next(1, 91);
+                } while (_generatedNumbers.Contains(nextNumber));
 
-            _generatedNumbers.Add(nextNumber);
-            return true;
+                _generatedNumbers.Add(nextNumber);
+                return true;
+            }
         }
 
         public void Reset()
         {
-            _generatedNumbers.Clear();
+            lock (_lock)
+            {
+                _generatedNumbers.Clear();
+            }
         }
     }
 }

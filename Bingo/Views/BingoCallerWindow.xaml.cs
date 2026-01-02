@@ -1,11 +1,11 @@
-using Bingo.ViewModels;
 using System.Windows;
+using Bingo.ViewModels;
 
 namespace Bingo.Views
 {
-    public partial class BingoCallerView : Window
+    public partial class BinfoCallerView : Window
     {
-        public BingoCallerView(BingoCallerViewModel viewModel)
+        public BinfoCallerView(BingoCallerViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
