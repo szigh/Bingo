@@ -1,6 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Bingo.Generators;
+using Bingo.Services;
 using Bingo.ViewModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -11,13 +11,19 @@ public partial class BingoCallerViewModel : ObservableObject
 {
     private readonly IBingoNumberGenerator _bingoNumberGenerator;
     private readonly CalledNumbersBoardViewModel _numbersBoard;
+    private readonly IDialogService _dialogService;
+    private readonly IWindowService _windowService;
 
     public BingoCallerViewModel(
         IBingoNumberGenerator bingoNumberGenerator, 
-        CalledNumbersBoardViewModel numbersBoard)
+        CalledNumbersBoardViewModel numbersBoard,
+        IDialogService dialogService,
+        IWindowService windowService)
     {
         _bingoNumberGenerator = bingoNumberGenerator;
         _numbersBoard = numbersBoard;
+        _dialogService = dialogService;
+        _windowService = windowService;
         CallNextNumberCommand = new RelayCommand(CallNextNumber);
         NewGameCommand = new RelayCommand(NewGame);
         ExitCommand = new RelayCommand(Exit);
@@ -62,13 +68,13 @@ public partial class BingoCallerViewModel : ObservableObject
 
     private void Exit()
     {
-        var result = MessageBox.Show("Are you sure you want to exit the game - all progress " +
-            "will be lost?", "Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        var confirmed = _dialogService.ShowConfirmation(
+            "Are you sure you want to exit the game - all progress will be lost?", 
+            "Exit");
         
-        if (result == MessageBoxResult.Yes)
+        if (confirmed)
         {
-            Application.Current.Windows.OfType<Window>()
-                .FirstOrDefault(w => w.GetType() == typeof(Views.BingoCallerView))?.Close();
+            _windowService.CloseWindow<Views.BingoCallerView>();
         }
     }
 }
