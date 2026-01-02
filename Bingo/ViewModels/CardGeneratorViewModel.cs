@@ -1,6 +1,5 @@
-using System.Windows;
 using System.Windows.Input;
-using Bingo.Generators;
+using Bingo.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -8,6 +7,8 @@ namespace Bingo.ViewModels
 {
     public partial class CardGeneratorViewModel : ObservableObject
     {
+        private readonly IDialogService _dialogService;
+
         [ObservableProperty]
         private int _numberOfCards = 6;
 
@@ -17,8 +18,9 @@ namespace Bingo.ViewModels
         public ICommand GenerateCardsCommand { get; }
         public ICommand PrintCardsCommand { get; }
 
-        public CardGeneratorViewModel()
+        public CardGeneratorViewModel(IDialogService dialogService)
         {
+            _dialogService = dialogService;
             GenerateCardsCommand = new RelayCommand(GenerateCards);
             PrintCardsCommand = new RelayCommand(PrintCards, CanPrintCards);
         }
@@ -35,16 +37,18 @@ namespace Bingo.ViewModels
             
             // TODO: Implement card generation logic
             // For now, just a placeholder
-            MessageBox.Show($"Would generate {NumberOfCards} bingo cards", 
-                "Card Generation", MessageBoxButton.OK, MessageBoxImage.Information);
+            _dialogService.ShowInformation(
+                $"Would generate {NumberOfCards} bingo cards", 
+                "Card Generation");
             
             StatusMessage = $"Generated {NumberOfCards} cards successfully!";
         }
 
         private void PrintCards()
         {
-            MessageBox.Show("Print functionality coming soon!", 
-                "Print Cards", MessageBoxButton.OK, MessageBoxImage.Information);
+            _dialogService.ShowInformation(
+                "Print functionality coming soon!", 
+                "Print Cards");
         }
 
         private bool CanPrintCards()
