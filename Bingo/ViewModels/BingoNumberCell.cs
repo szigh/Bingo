@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Bingo;
+namespace Bingo.ViewModels;
 
 public partial class BingoNumberCell : ObservableObject
 {

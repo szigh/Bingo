@@ -1,5 +1,8 @@
 ﻿using System.Windows;
+using Bingo.Generators;
+using Bingo.Services;
 using Bingo.ViewModels;
+using Bingo.Views;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bingo
@@ -16,16 +19,28 @@ namespace Bingo
             ConfigureServices(serviceCollection);
             _serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            var mainWindow = _serviceProvider.GetRequiredService<BinfoCallerView>();
             mainWindow.Show();
         }
 
         private static void ConfigureServices(IServiceCollection services)
         {
+            // Services
+            services.AddSingleton<IDialogService, DialogService>();
+            services.AddSingleton<IWindowService, WindowService>();
+            
+            // Generators
             services.AddSingleton<IBingoNumberGenerator, BingoNumberGenerator>();
+            
+            // ViewModels
             services.AddTransient<CalledNumbersBoardViewModel>();
             services.AddTransient<BingoCallerViewModel>();
-            services.AddTransient<MainWindow>();
+            services.AddTransient<CardGeneratorViewModel>();
+            
+            // Views
+            services.AddTransient<BinfoCallerView>();
+            services.AddTransient<BingoCallerView>();
+            services.AddTransient<CardGeneratorView>();
         }
 
         protected override void OnExit(ExitEventArgs e)

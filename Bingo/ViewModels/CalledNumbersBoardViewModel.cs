@@ -24,4 +24,10 @@ public partial class CalledNumbersBoardViewModel : ObservableObject
         if (number is >= 1 and <= 90)
             _cells[number - 1].IsCalled = true;
     }
+
+    public void Reset()
+    {
+        foreach (var cell in _cells)
+            cell.IsCalled = false;
+    }
 }
