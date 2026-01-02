@@ -19,12 +19,19 @@ public partial class CalledNumbersBoardViewModel : ObservableObject
 
     public ObservableCollection<BingoNumberCell> Numbers { get; }
 
+    /// <summary>
+    /// Marks the specified bingo number as called on the board.
+    /// </summary>
+    /// <param name="number">The bingo number to mark as called (1-90).</param>
     public void MarkNumberCalled(int number)
     {
         if (number is >= 1 and <= 90)
             _cells[number - 1].IsCalled = true;
     }
 
+    /// <summary>
+    /// Resets the called numbers board by marking all numbers as not called.
+    /// </summary>
     public void Reset()
     {
         foreach (var cell in _cells)
