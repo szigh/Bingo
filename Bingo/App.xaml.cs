@@ -31,6 +31,7 @@ namespace Bingo
             
             // Generators
             services.AddSingleton<IBingoNumberGenerator, BingoNumberGenerator>();
+            services.AddSingleton<BingoCardGenerator>();
             
             // ViewModels
             services.AddTransient<CalledNumbersBoardViewModel>();

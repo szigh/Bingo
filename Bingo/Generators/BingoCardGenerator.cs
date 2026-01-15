@@ -1,10 +1,5 @@
 ﻿namespace Bingo.Generators
 {
-    public interface IBingoCardGenerator
-    {
-        static abstract BingoCard GenerateCard();
-    }
-
     /// <summary>
     /// Generates 90-ball Bingo cards following UK Bingo rules:
     /// - 3 rows × 9 columns grid (27 cells)
@@ -14,7 +9,7 @@
     /// - Column 0: 1-9, Column 1: 10-19, ..., Column 8: 80-90
     /// - Numbers within columns are sorted in ascending order
     /// </summary>
-    public class BingoCardGenerator : IBingoCardGenerator
+    public class BingoCardGenerator
     {
         public static BingoCard GenerateCard()
         {
